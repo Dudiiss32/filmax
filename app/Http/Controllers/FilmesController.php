@@ -11,7 +11,7 @@ class FilmesController extends Controller
     {
         $filmes = Filme::all();
 
-        return view("filmes", [
+        return view("filmes.index", [
             'filmes' => $filmes,
         ]);
     }

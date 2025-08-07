@@ -24,7 +24,6 @@ Route::prefix('/filmes')->group(function(){
     Route::put('/update/{id}', [FilmesController::class, 'update'])->name('filmes.update');
 });
 
-
 // Categorias
 Route::prefix('/categorias')->group(function(){
     Route::get('/', [CategoriasController::class, 'index'])->name('categorias');
