@@ -19,6 +19,7 @@
         <ul>
             @foreach ($filmes as $filme)
                 <li><img src="{{$filme->imagem}}" alt="" style="width: 100px"></li>
+                <li><a href="{{route('filmes.verMais', $filme->id)}}">Ver mais</a></li>
             @endforeach
         </ul>
     </div>

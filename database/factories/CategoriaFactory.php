@@ -17,7 +17,18 @@ class CategoriaFactory extends Factory
     public function definition(): array
     {
         return [
-            'nome' => fake()->realText(20),
+            'nome' => fake()->randomElement([
+                'Ação',
+                'Comédia',
+                'Terror',
+                'Suspense',
+                'Drama',
+                'Ficção',
+                'Animação',
+                'Romance',
+                'Documentário',
+                'Musical',
+            ]),
         ];
     }
 }

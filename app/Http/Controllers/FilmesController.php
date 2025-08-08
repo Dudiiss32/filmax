@@ -16,6 +16,14 @@ class FilmesController extends Controller
         ]);
     }
 
+    public function verMais($id){
+        $filme = Filme::findOrFail($id);
+
+        return view("filmes.verMais", [
+            'filme' => $filme,
+        ]);
+    }
+
     public function form($id)
     {
         return view('filmes.form');

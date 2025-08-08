@@ -22,6 +22,7 @@ Route::prefix('/filmes')->group(function(){
     Route::get('/edit/{id}', [FilmesController::class, 'form'])->name('filmes.edit');
     Route::delete('/delete/{id}', [FilmesController::class, 'delete'])->name('filmes.delete');
     Route::put('/update/{id}', [FilmesController::class, 'update'])->name('filmes.update');
+    Route::get('/verMais/{id}', [FilmesController::class, 'verMais'])->name('filmes.verMais');
 });
 
 // Categorias
