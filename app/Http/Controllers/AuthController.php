@@ -17,12 +17,16 @@ class AuthController extends Controller
             'password' => 'required|string|min:6|confirmed',
         ]);
 
-        User::create([
+        logger($request);
+
+        $user = User::create([
             'name' => $request->name,
             'email' => $request->email,
             'password' => Hash::make($request->password),
         ]);
-
+        
+        Auth::login($user);
+        $request->session()->regenerate();
         return redirect()->route('filmes');
     }
 
@@ -33,16 +37,19 @@ class AuthController extends Controller
             'password' => 'required',
         ]);
 
-        $user = User::where('email', $request->email)->first();
-
-        if (!$user || !Hash::check($request->password, $user->password)) {
-            return redirect()->route('index');
-        } else {
+        if (Auth::attempt($request->only('email', 'password'))) {
+            $request->session()->regenerate();
             return redirect()->route('filmes');
         }
+
+        return redirect()->route('index')->withErrors([
+            'email' => 'Credenciais inválidas',
+        ]);
     }
 
-    public function logout(){
+
+    public function logout()
+    {
         Auth::logout();
         return redirect()->route('index');
     }

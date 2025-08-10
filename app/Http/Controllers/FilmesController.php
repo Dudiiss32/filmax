@@ -16,7 +16,8 @@ class FilmesController extends Controller
         ]);
     }
 
-    public function verMais($id){
+    public function verMais($id)
+    {
         $filme = Filme::findOrFail($id);
 
         return view("filmes.verMais", [
@@ -24,7 +25,7 @@ class FilmesController extends Controller
         ]);
     }
 
-    public function form($id)
+    public function form()
     {
         return view('filmes.form');
     }
@@ -32,11 +33,15 @@ class FilmesController extends Controller
     public function store(Request $request)
     {
         $dados = $request->validate([
-            'name' => 'required|string',
+            'nome' => 'required|string',
+            'sinopse' => 'required|string',
+            'ano' => 'required|integer|digits:4',
+            'imagem' => 'required|string',
+            'link' => 'required|string',
         ]);
 
         Filme::create($dados);
-        return redirect()->route('filmes.index');
+        return redirect()->route('filmes');
     }
 
     public function edit($id)
@@ -49,13 +54,17 @@ class FilmesController extends Controller
     public function update(Request $request, $id)
     {
         $dados = $request->validate([
-            'name' => 'required|string',
+            'nome' => 'required|string',
+            'sinopse' => 'required|string',
+            'ano' => 'required|integer|digits:4',
+            'imagem' => 'required|string',
+            'link' => 'required|string',
         ]);
 
         $filme = Filme::findOrFail($id);
+        $filme->update($dados);
 
-        $filme::update($dados);
-        return redirect()->route('filmes.index');
+        return redirect()->route('filmes');
     }
 
     public function delete($id)
@@ -63,6 +72,6 @@ class FilmesController extends Controller
         $filme = Filme::findOrFail($id);
         $filme->delete();
 
-        return redirect()->route('');
+        return redirect()->route('filmes');
     }
 }

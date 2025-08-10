@@ -8,7 +8,8 @@
 </head>
 <body>
     <header>
-        <a href="{{route('filmes')}}">🏚</a>
+        <a href="{{route('logout')}}">logout</a>
+        <a href="{{route('filmes.form')}}">novo filme</a>
     </header>
     <div class="filtros">
         <a href="#">Todos</a>

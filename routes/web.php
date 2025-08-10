@@ -11,26 +11,35 @@ Route::get('/', function () {
 
 // Login
 Route::post('/login', [AuthController::class, 'login'])->name('login');
+Route::get('/login', function () {
+    return view('index');
+});
 Route::post('/register', [AuthController::class, 'register'])->name('register');
 Route::get('/logout', [AuthController::class, 'logout'])->name('logout');
 
-// Filmes
-Route::prefix('/filmes')->group(function(){
-    Route::get('/', [FilmesController::class, 'index'])->name('filmes');
-    Route::get('/form', [FilmesController::class, 'form'])->name('filmes.form');
-    Route::post('/store', [FilmesController::class, 'store'])->name('filmes.store');
-    Route::get('/edit/{id}', [FilmesController::class, 'form'])->name('filmes.edit');
-    Route::delete('/delete/{id}', [FilmesController::class, 'delete'])->name('filmes.delete');
-    Route::put('/update/{id}', [FilmesController::class, 'update'])->name('filmes.update');
-    Route::get('/verMais/{id}', [FilmesController::class, 'verMais'])->name('filmes.verMais');
+Route::middleware('auth')->group(function () {
+    Route::get('/filmes', [FilmesController::class, 'index'])->name('filmes');
+    Route::get('/filmes/verMais/{id}', [FilmesController::class, 'verMais'])->name('filmes.verMais');
 });
 
-// Categorias
-Route::prefix('/categorias')->group(function(){
-    Route::get('/', [CategoriasController::class, 'index'])->name('categorias');
-    Route::get('/form', [CategoriasController::class, 'form'])->name('categorias.form');
-    Route::post('/store', [CategoriasController::class, 'store'])->name('categorias.store');
-    Route::get('/edit/{id}', [CategoriasController::class, 'edit'])->name('categorias.edit');
-    Route::delete('/delete/{id}', [CategoriasController::class, 'delete'])->name('categorias.delete');
-    Route::put('/update/{id}', [CategoriasController::class, 'update'])->name('categorias.update');
+Route::middleware(['auth', 'isAdmin'])->group(function () {
+
+    // Filmes
+    Route::prefix('/filmes')->group(function () {
+        Route::get('/form', [FilmesController::class, 'form'])->name('filmes.form');
+        Route::post('/store', [FilmesController::class, 'store'])->name('filmes.store');
+        Route::get('/edit/{id}', [FilmesController::class, 'edit'])->name('filmes.edit');
+        Route::delete('/delete/{id}', [FilmesController::class, 'delete'])->name('filmes.delete');
+        Route::put('/update/{id}', [FilmesController::class, 'update'])->name('filmes.update');
+    });
+
+    // Categorias
+    Route::prefix('/categorias')->group(function () {
+        Route::get('/', [CategoriasController::class, 'index'])->name('categorias');
+        Route::get('/form', [CategoriasController::class, 'form'])->name('categorias.form');
+        Route::post('/store', [CategoriasController::class, 'store'])->name('categorias.store');
+        Route::get('/edit/{id}', [CategoriasController::class, 'edit'])->name('categorias.edit');
+        Route::delete('/delete/{id}', [CategoriasController::class, 'delete'])->name('categorias.delete');
+        Route::put('/update/{id}', [CategoriasController::class, 'update'])->name('categorias.update');
+    });
 });
