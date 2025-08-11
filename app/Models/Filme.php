@@ -14,6 +14,6 @@ class Filme extends Model
 
     public function categorias(): BelongsToMany
     {
-        return $this->belongsToMany(Categoria::class, 'categorias_filmes');
+        return $this->belongsToMany(Categoria::class, 'categoria_filmes');
     }
 }

@@ -14,6 +14,6 @@ class Categoria extends Model
 
     public function filmes(): BelongsToMany
     {
-        return $this->belongsToMany(Filme::class, 'categorias_filmes');
+        return $this->belongsToMany(Filme::class, 'categoria_filmes');
     }
 }

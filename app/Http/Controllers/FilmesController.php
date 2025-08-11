@@ -96,7 +96,7 @@ class FilmesController extends Controller
         
         $filme->update($dados);
 
-        return redirect()->route('filmes');
+        return redirect()->route('filmes.verMais', $id);
     }
 
     public function delete($id)
