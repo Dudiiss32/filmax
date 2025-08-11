@@ -9,6 +9,10 @@ Route::get('/', function () {
     return view('index');
 })->name('index');
 
+Route::get('/teste', function () {
+    return view('examples.tailwind-demo');
+})->name('indexsss');
+
 // Login
 Route::post('/login', [AuthController::class, 'login'])->name('login');
 Route::get('/login', function () {

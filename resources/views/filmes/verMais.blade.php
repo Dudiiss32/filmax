@@ -11,7 +11,7 @@
 </head>
 
 <body>
-    <a href="{{route('filmes')}}">Voltar</a>
+        <a href="{{route('filmes')}}"><x-hero-icon name="arrow-left" class="w-5 h-5 mr-2" />Voltar</a>
     <ul>
         <li>{{ $filme->nome }}</li>
         <li><img src="{{asset('storage/'. $filme->imagem)}}" alt="{{$filme->nome}}" style="width: 500px"></li>

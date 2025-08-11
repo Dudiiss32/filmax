@@ -4,7 +4,7 @@
 
 @section('content')
 
-    <a href="{{route('filmes')}}">Voltar</a>
+    <a href="{{route('filmes')}}"><x-hero-icon name="arrow-left" class="w-5 h-5 mr-2" />Voltar</a>
     @if ($errors->any())
         <div class="alert alert-danger">
             <ul>
@@ -14,7 +14,8 @@
             </ul>
         </div>
     @endif
-    <form action="{{ isset($filme) ? route('filmes.update', $filme->id) : route('filmes.store') }}" method="POST" enctype="multipart/form-data">
+    <form action="{{ isset($filme) ? route('filmes.update', $filme->id) : route('filmes.store') }}" method="POST"
+        enctype="multipart/form-data">
         @csrf
         @if (isset($filme))
             @method('PUT')
@@ -40,7 +41,7 @@
 
         <br>
         @foreach ($categorias as $cat)
-            <input type="checkbox" name="categorias[]" id="" value="{{$cat->id}}"  {{ isset($filme) && $filme->categorias->contains($cat->id) ? 'checked' : '' }}>
+            <input type="checkbox" name="categorias[]" id="" value="{{$cat->id}}" {{ isset($filme) && $filme->categorias->contains($cat->id) ? 'checked' : '' }}>
             <label for="">{{$cat->nome}}</label>
         @endforeach
         <br>

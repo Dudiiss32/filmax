@@ -3,26 +3,29 @@
 @section('title', 'Lista de categorias')
 
 @section('content')
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Document</title>
-</head>
-<body>
-    <a href="{{route('filmes')}}">Voltar</a>
-    <a href="{{route('categorias.form')}}">Nova categoria</a>
-    <div class="categorias">
-        <ul>
-            @foreach ($categorias as $cat)
-                <li>{{$cat->nome}}</li>
-                <a href="{{ route('categorias.edit', $cat->id) }}">Editar</a>
-                <form action="{{ route('categorias.delete', $cat->id) }}" method="POST" style="display:inline">
-                    @csrf
-                    @method('DELETE')
-                    <button type="submit">Excluir</button>
-                </form>
-            @endforeach
-        </ul>
+    <div>
+        <a href="{{route('categorias.form')}}"
+            class="flex items-center w-fit py-2 px-4 rounded-full bg-[#6100FF] hover:bg-[#4700ba]"><x-hero-icon name="plus"
+                class="w-5 h-5 mr-2" />Nova categoria</a>
     </div>
+    <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6 mt-6">
+        @foreach ($categorias as $cat)
+            <div class="bg-white rounded-full shadow-xl p-4 flex items-center justify-between text-[#6000FD]">
+                <p class="font-bold">{{ $cat->nome }}</p>
+                <div class="flex gap-3">
+                    <a href="{{ route('categorias.edit', $cat->id) }}" class="text-yellow-500 hover:text-yellow-600">
+                        <x-hero-icon name="pencil" class="w-5 h-5" />
+                    </a>
+                    <form action="{{ route('categorias.delete', $cat->id) }}" method="POST">
+                        @csrf
+                        @method('DELETE')
+                        <button type="submit" class="text-red-500 hover:text-red-600 cursor-pointer">
+                            <x-hero-icon name="trash" class="w-5 h-5" />
+                        </button>
+                    </form>
+                </div>
+            </div>
+        @endforeach
+    </div>
+
 @endsection
