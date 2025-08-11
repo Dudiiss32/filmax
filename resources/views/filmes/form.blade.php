@@ -1,14 +1,10 @@
-<!DOCTYPE html>
-<html lang="en">
+@extends('layouts.app')
 
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Página inicial de filmes</title>
-</head>
+@section('title', 'Cadastrar filmes')
 
-<body>
+@section('content')
+
+    <a href="{{route('filmes')}}">Voltar</a>
     @if ($errors->any())
         <div class="alert alert-danger">
             <ul>
@@ -18,7 +14,7 @@
             </ul>
         </div>
     @endif
-    <form action="{{ isset($filme) ? route('filmes.update', $filme->id) : route('filmes.store') }}" method="POST">
+    <form action="{{ isset($filme) ? route('filmes.update', $filme->id) : route('filmes.store') }}" method="POST" enctype="multipart/form-data">
         @csrf
         @if (isset($filme))
             @method('PUT')
@@ -33,8 +29,21 @@
         <label for="ano">Ano:</label>
         <input type="number" id="ano" name="ano" value="{{ isset($filme) ? $filme->ano : '' }}">
 
-        <label for="imagem">Imagem (URL):</label>
-        <input type="text" id="imagem" name="imagem" value="{{ isset($filme) ? $filme->imagem : '' }}">
+        <label for="imagem">Imagem:</label>
+        @if (isset($filme) && $filme->imagem)
+            <div style="margin-bottom: 10px;">
+                <p>Imagem atual:</p>
+                <img src="{{ asset('storage/' . $filme->imagem) }}" alt="Imagem do filme" width="150">
+            </div>
+        @endif
+        <input type="file" id="imagem" name="imagem">
+
+        <br>
+        @foreach ($categorias as $cat)
+            <input type="checkbox" name="categorias[]" id="" value="{{$cat->id}}"  {{ isset($filme) && $filme->categorias->contains($cat->id) ? 'checked' : '' }}>
+            <label for="">{{$cat->nome}}</label>
+        @endforeach
+        <br>
 
         <label for="link">Link:</label>
         <input type="text" id="link" name="link" value="{{ isset($filme) ? $filme->link : '' }}">
@@ -44,6 +53,4 @@
             <button type="submit">{{ isset($filme) ? 'Atualizar' : 'Cadastrar' }}</button>
         </div>
     </form>
-</body>
-
-</html>
+@endsection

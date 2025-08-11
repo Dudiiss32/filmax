@@ -1,28 +1,41 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Página inicial de filmes</title>
-</head>
-<body>
+@extends('layouts.app')
+
+@section('title', 'Lista de Filmes')
+
+@section('content')
     <header>
-        <a href="{{route('logout')}}">logout</a>
-        <a href="{{route('filmes.form')}}">novo filme</a>
+        @can('acesso-admin')
+        <a href="{{route('filmes.form')}}">Adicionar filme</a>
+        @endcan
     </header>
     <div class="filtros">
-        <a href="#">Todos</a>
-        <a href="#">Por ano</a>
-        <a href="#">Por categoria</a>
-    </div>
+    <h2>Filtrar</h2>
+    <a href="{{ route('filmes') }}">
+        Todos os Filmes
+    </a>
+    <form method="GET" action="{{ route('filmes') }}">
+        <label for="ano">Ano:</label>
+        <input type="number" name="ano" value="{{ request('ano') }}" placeholder="Ex: 2024">
+
+        <label for="categoria_id">Categoria:</label>
+        <select name="categoria_id">
+            <option value="">Todas</option>
+            @foreach($categorias as $categoria)
+                <option value="{{ $categoria->id }}" {{ request('categoria_id') == $categoria->id ? 'selected' : '' }}>
+                    {{ $categoria->nome }}
+                </option>
+            @endforeach
+        </select>
+
+        <button type="submit">Filtrar</button>
+    </form>
+</div>
     <div class="filmes">
         <ul>
             @foreach ($filmes as $filme)
-                <li><img src="{{$filme->imagem}}" alt="" style="width: 100px"></li>
+                <li><img src="{{asset('storage/'. $filme->imagem)}}" alt="{{$filme->nome}}" style="width: 100px"></li>
                 <li><a href="{{route('filmes.verMais', $filme->id)}}">Ver mais</a></li>
             @endforeach
         </ul>
     </div>
-</body>
-</html>
+@endsection

@@ -24,11 +24,11 @@ class CategoriasController extends Controller
     public function store(Request $request)
     {
         $dados = $request->validate([
-            'name' => 'required|string',
+            'nome' => 'required|string',
         ]);
 
         Categoria::create($dados);
-        return redirect()->route('categorias.index');
+        return redirect()->route('categorias');
     }
 
     public function edit($id)
@@ -41,13 +41,13 @@ class CategoriasController extends Controller
     public function update(Request $request, $id)
     {
         $dados = $request->validate([
-            'name' => 'required|string',
+            'nome' => 'required|string',
         ]);
 
         $categoria = Categoria::findOrFail($id);
 
-        $categoria::update($dados);
-        return redirect()->route('categorias.index');
+        $categoria->update($dados);
+        return redirect()->route('categorias');
     }
 
     public function delete($id)
@@ -55,6 +55,6 @@ class CategoriasController extends Controller
         $categoria = Categoria::findOrFail($id);
         $categoria->delete();
 
-        return redirect()->route('categorias.index');
+        return redirect()->route('categorias');
     }
 }

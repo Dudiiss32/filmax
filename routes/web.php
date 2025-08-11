@@ -13,9 +13,15 @@ Route::get('/', function () {
 Route::post('/login', [AuthController::class, 'login'])->name('login');
 Route::get('/login', function () {
     return view('index');
-});
-Route::post('/register', [AuthController::class, 'register'])->name('register');
+})->name('login.index');
 Route::get('/logout', [AuthController::class, 'logout'])->name('logout');
+
+// Cadastro
+Route::post('/register', [AuthController::class, 'register'])->name('register');
+Route::get('/register', function () {
+    return view('cadastro.index');
+})->name('cadastro');
+
 
 Route::middleware('auth')->group(function () {
     Route::get('/filmes', [FilmesController::class, 'index'])->name('filmes');
