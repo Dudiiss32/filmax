@@ -9,7 +9,7 @@
 
 <body class="bg-[#0F0021] min-h-screen flex justify-center items-center flex-col">
     @if ($errors->any())
-        <div class="absolute top-4 w-full max-w-md mx-auto px-4">
+        <div class="absolute top-4 w-full max-w-md px-4">
             <div class="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded-lg">
                 <ul class="list-disc list-inside">
                     @foreach ($errors->all() as $error)
