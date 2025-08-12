@@ -13,6 +13,21 @@ class CategoriaSeeder extends Seeder
      */
     public function run(): void
     {
-        Categoria::factory(10)->create();
+        $categorias = [
+            'Ação',
+            'Comédia',
+            'Terror',
+            'Suspense',
+            'Drama',
+            'Ficção',
+            'Animação',
+            'Romance',
+            'Documentário',
+            'Musical',
+        ];
+
+        foreach ($categorias as $categoria) {
+            Categoria::create(['nome' => $categoria]);
+        }
     }
 }

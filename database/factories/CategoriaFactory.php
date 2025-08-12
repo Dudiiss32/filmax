@@ -17,7 +17,7 @@ class CategoriaFactory extends Factory
     public function definition(): array
     {
         return [
-            'nome' => fake()->randomElement([
+            'nome' => [
                 'Ação',
                 'Comédia',
                 'Terror',
@@ -28,7 +28,7 @@ class CategoriaFactory extends Factory
                 'Romance',
                 'Documentário',
                 'Musical',
-            ]),
+            ],
         ];
     }
 }

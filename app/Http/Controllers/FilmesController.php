@@ -31,7 +31,7 @@ class FilmesController extends Controller
     public function verMais($id)
     {
         $filme = Filme::with('categorias')->findOrFail($id);
-
+ 
         return view("filmes.verMais", [
             'filme' => $filme,
         ]);

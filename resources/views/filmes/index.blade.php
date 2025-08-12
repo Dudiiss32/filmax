@@ -44,7 +44,7 @@
         <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-12 mt-10 rounded-lg bg-[#1E0F2C]">
             @foreach ($filmes as $filme)
                 <div class="bg-white rounded-lg shadow-xl overflow-hidden flex flex-col hover:scale-105 transition">
-                    <img src="{{ asset($filme->imagem) }}" alt="{{ $filme->nome }}" class="w-full h-80 object-cover bg-gray-200">
+                    <img src="{{ asset($filme->imagem) }}" alt="{{ $filme->nome }}" class="w-full object-cover bg-gray-200">
                     <div class="p-4 flex flex-col flex-grow gap-4">
                         <div class="flex justify-between items-center">
                             <h3 class="text-xl font-bold text-gray-800">{{ $filme->nome }}</h3>
