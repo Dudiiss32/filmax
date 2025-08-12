@@ -48,12 +48,6 @@
             <!-- Teste: este texto não deve ser selecionável -->
             @yield('content')
         </main>
-
-    </div>
-
-    <footer>
-
-    </footer>
 </body>
 
 </html>

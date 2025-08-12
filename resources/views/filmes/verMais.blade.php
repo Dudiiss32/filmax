@@ -23,7 +23,8 @@
                         <a href="{{ route('filmes.edit', $filme->id) }} "
                             class="flex border-2 border-[#6100FF] hover:bg-[#6100FF] px-4 py-2 w-fit rounded-full transition items-center"><x-hero-icon
                                 name="pencil" class="w-5 h-5 mr-2" />Editar</a>
-                        <form action="{{ route('filmes.delete', $filme->id) }}" method="POST" onsubmit="return confirm('Excluir este filme?')">
+                        <form action="{{ route('filmes.delete', $filme->id) }}" method="POST"
+                            onsubmit="return confirm('Excluir este filme?')">
                             @csrf
                             @method('DELETE')
                             <button type="submit"
@@ -49,11 +50,12 @@
                 <p class="font-semibold text-xl mb-1">Data de lançamento</p>
                 <p>{{ $filme->ano }}</p>
             </div>
-            <div>
-                <x-embed url="{{ $filme->link }}" />
-                <p class="font-semibold text-xl mb-1">Link para trailer</p>
-                <a target="_blank" href="{{$filme->link}}" class="underline hover:text-indigo-700 transition">{{$filme->link}}</a></p>
-            </div>
+        </div>
+    </div>
+    <div class="mt-10 mb-6 flex flex-col items-center">
+        <h2 class="text-3xl font-bold text-center mb-6">Assista ao trailer <span class="italic text-[#6100FF] text-4xl">!</span></h2>
+        <div class="w-[800px] p-1 bg-[#6100FF] rounded-xl">
+            <x-embed url="{{ $filme->link }}" class="w-full h-full" />
         </div>
     </div>
 
