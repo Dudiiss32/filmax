@@ -13,13 +13,13 @@
             <div class="bg-white rounded-full shadow-xl p-4 flex items-center justify-between text-[#6000FD]">
                 <p class="font-bold">{{ $cat->nome }}</p>
                 <div class="flex gap-3">
-                    <a href="{{ route('categorias.edit', $cat->id) }}" class="text-yellow-500 hover:text-yellow-600">
+                    <a href="{{ route('categorias.edit', $cat->id) }}" class="flex border-2 border-[#6100FF] hover:bg-[#6100FF] p-2 w-fit rounded-full transition items-center cursor-pointer hover:text-white">
                         <x-hero-icon name="pencil" class="w-5 h-5" />
                     </a>
-                    <form action="{{ route('categorias.delete', $cat->id) }}" method="POST">
+                    <form action="{{ route('categorias.delete', $cat->id) }}" method="POST" onsubmit="return confirm('Excluir esta categoria?')">
                         @csrf
                         @method('DELETE')
-                        <button type="submit" class="text-red-500 hover:text-red-600 cursor-pointer">
+                        <button type="submit" class="flex border-2 border-[#6100FF] hover:bg-[#6100FF] p-2 w-fit rounded-full transition items-center cursor-pointer hover:text-white">
                             <x-hero-icon name="trash" class="w-5 h-5" />
                         </button>
                     </form>

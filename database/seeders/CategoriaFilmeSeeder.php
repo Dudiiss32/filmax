@@ -13,6 +13,6 @@ class CategoriaFilmeSeeder extends Seeder
      */
     public function run(): void
     {
-        CategoriaFilme::factory(10)->create();
+        CategoriaFilme::factory(20)->create();
     }
 }

@@ -10,7 +10,7 @@ class FilmesController extends Controller
 {
     public function index(Request $request)
     {
-        $query = Filme::query();
+        $query = Filme::with('categorias');
 
         if ($request->filled('ano')) {
             $query->where('ano', $request->ano);
@@ -49,15 +49,15 @@ class FilmesController extends Controller
             'nome' => 'required|string',
             'sinopse' => 'required|string',
             'ano' => 'required|integer|digits:4',
-            'imagem' => 'required|image|mimes:jpeg,png,jpg',
+            'imagem' => 'required|image|mimes:jpeg,png,jpg,webp',
             'link' => 'required|string',
-            'categorias' => 'array', 
-            'categorias.*' => 'exists:categorias,id', 
+            'categorias' => 'array',
+            'categorias.*' => 'exists:categorias,id',
         ]);
 
-        if($request->hasFile('imagem')){
+        if ($request->hasFile('imagem')) {
             $caminho = $request->file('imagem')->store('imagens', 'public');
-            $dados['imagem'] = $caminho;
+            $dados['imagem'] = 'storage/' . $caminho;
         }
 
         $filme = Filme::create($dados);
@@ -71,7 +71,7 @@ class FilmesController extends Controller
         $filme = Filme::with('categorias')->findOrFail($id);
         $categorias = Categoria::all();
 
-        return view('filmes.form', compact('filme','categorias'));
+        return view('filmes.form', compact('filme', 'categorias'));
     }
 
     public function update(Request $request, $id)
@@ -80,20 +80,20 @@ class FilmesController extends Controller
             'nome' => 'required|string',
             'sinopse' => 'required|string',
             'ano' => 'required|integer|digits:4',
-            'imagem' => 'image|mimes:jpeg,png,jpg',
+            'imagem' => 'image|mimes:jpeg,png,jpg,webp',
             'link' => 'required|string',
-            'categorias' => 'array', 
-            'categorias.*' => 'exists:categorias,id', 
+            'categorias' => 'array',
+            'categorias.*' => 'exists:categorias,id',
         ]);
 
         $filme = Filme::findOrFail($id);
         $filme->categorias()->sync($request->input('categorias', []));
 
-        if($request->hasFile('imagem')){
+        if ($request->hasFile('imagem')) {
             $caminho = $request->file('imagem')->store('imagens', 'public');
-            $dados['imagem'] = $caminho;
+            $dados['imagem'] = 'storage/' . $caminho;
         }
-        
+
         $filme->update($dados);
 
         return redirect()->route('filmes.verMais', $id);

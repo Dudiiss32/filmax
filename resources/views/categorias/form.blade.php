@@ -16,10 +16,16 @@
         <a href="{{route('categorias')}}"
             class="flex border-2 border-[#6100FF] hover:bg-[#6100FF] px-4 py-2 w-fit rounded-full transition items-center">
             <x-hero-icon name="arrow-left" class="w-5 h-5 mr-2" />Voltar</a>
-        <p class="font-bold text-2xl">Cadastrar categoria</p>
+                <p class="font-bold text-2xl">
+            @if (isset($categoria))
+                Editar categoria
+            @else
+                Cadastrar categoria
+            @endif
+        </p>
     </div>
     <div class="w-full h-full justify-center items-center flex mt-6">
-        <form class="bg-[#1E0F2C] w-full max-w-md p-8 rounded-2xl shadow-2xl text-white border-2 border-white space-y-5"
+        <form class="bg-[#1E0F2C] w-full max-w-md p-8 rounded-2xl shadow-2xl text-white border-2 border-white space-y-3"
             action="{{ isset($categoria) ? route('categorias.update', $categoria->id) : route('categorias.store') }}"
             method="POST" enctype="multipart/form-data">
             @csrf
@@ -27,7 +33,7 @@
                 @method('PUT')
             @endif
 
-            <label for="nome" class="block mb-1 font-medium">Nome:</label>
+            <label for="nome" class="block font-medium">Nome:</label>
             <input class="w-full px-4 py-2 rounded-lg bg-[#2B1A3D] focus:outline-none focus:ring-2 focus:ring-[#6000FD]"
                 type="text" id="nome" name="nome" value="{{ isset($categoria) ? $categoria->nome : '' }}">
 
