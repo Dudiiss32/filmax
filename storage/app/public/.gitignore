@@ -1,2 +1,5 @@
-/filmes
-!/filmes-seeder
+/public/*
+
+!/public/filmesSeeder
+
+!/public/filmesSeeder/**

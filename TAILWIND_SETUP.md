@@ -152,3 +152,4 @@ O Tailwind CSS inclui classes responsivas por padrão:
 - Execute `npm run build` para verificar se há erros
 - Confirme se o `tailwind.config.js` está na raiz do projeto
 - Verifique se o CSS está sendo importado no JavaScript
+
