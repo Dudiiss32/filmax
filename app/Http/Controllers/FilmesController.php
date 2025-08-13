@@ -119,7 +119,7 @@ class FilmesController extends Controller
             $msg = 'Filme adicionado aos favoritos.';
         }
 
-        return back()->with('success', $msg);
+        return redirect()->route('filmes')->with('success', $msg);
     }
 
     public function favoritos()
@@ -128,7 +128,7 @@ class FilmesController extends Controller
 
         $filmesFavoritos = $user->favoritos()->get();
 
-        return view('filmes.favoritos', compact('filmesFavoritos'));
+        return view('favoritos.index', compact('filmesFavoritos'));
     }
 
 }

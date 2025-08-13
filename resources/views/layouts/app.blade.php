@@ -32,10 +32,16 @@
             </h1>
             <nav class="flex flex-col text-white space-y-10 flex-grow justify-center w-full px-6 select-none">
 
-                <a href="{{ route('filmes') }}"
+                <a href="{{ route('perfil') }}"
                     class="flex items-center hover:text-[#6000FD] hover:scale-107 transition">
                     <x-hero-icon name="user" class="w-5 h-5 mr-2" />
                     Perfil
+                </a>
+
+                <a href="{{ route('filmes.favoritos') }}"
+                    class="flex items-center hover:text-[#6000FD] hover:scale-107 transition">
+                    <x-hero-icon name="user" class="w-5 h-5 mr-2" />
+                    Favoritos
                 </a>
 
                 <a href="{{ route('filmes') }}"

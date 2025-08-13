@@ -52,4 +52,10 @@ class AuthController extends Controller
         Auth::logout();
         return redirect()->route('index');
     }
+
+    public function perfil(){
+        $user = auth()->user();
+
+        return view('perfil.index', compact('user'));
+    }
 }

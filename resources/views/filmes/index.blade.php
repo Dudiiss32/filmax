@@ -50,11 +50,24 @@
                             <h3 class="text-xl font-bold text-gray-800">{{ $filme->nome }}</h3>
                             <p class="text-lg text-gray-600 font-semibold">{{ $filme->ano }}</p>
                         </div>
-                        <div class="flex flex-wrap gap-2">
-                            @foreach ($filme->categorias as $categoria)
-                                <p class="text-white bg-[#0F0021] rounded-full px-2 py-1 w-fit">{{ $categoria->nome }}</p>
-                            @endforeach
+
+                        <div class="flex flex-row justify-between">
+                            <div class="flex flex-wrap gap-2">
+                                @foreach ($filme->categorias as $categoria)
+                                    <p class="text-white bg-[#0F0021] rounded-full px-2 py-1 w-fit">{{ $categoria->nome }}</p>
+                                @endforeach
+                            </div>
+                            <form action="{{route('filmes.favoritar', $filme->id)}}" method="post">
+                                @csrf
+                                <button type="submit" class="flex items-center justify-center w-8 h-8 rounded-full hover:bg-gray-100 transition-colors">
+                                    @php
+                                        $isFavorito = auth()->user()->favoritos->contains($filme->id);
+                                    @endphp
+                                    <x-hero-icon name="heart" class="w-5 h-5 text-red-500 {{ $isFavorito ? 'fill-red-500' : 'fill-none' }} hover:fill-red-500 transition-colors"/>
+                                </button>
+                            </form>
                         </div>
+                        
                         <a href="{{ route('filmes.verMais', $filme->id) }}"
                             class="mt-auto inline-block text-center bg-[#6000FD] hover:bg-[#4700ba] text-white py-2 rounded-full transition">
                             Ver mais

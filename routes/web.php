@@ -30,8 +30,9 @@ Route::get('/register', function () {
 Route::middleware('auth')->group(function () {
     Route::get('/filmes', [FilmesController::class, 'index'])->name('filmes');
     Route::get('/filmes/verMais/{id}', [FilmesController::class, 'verMais'])->name('filmes.verMais');
-    Route::post('/filmes/{filme}/favoritar', [FilmesController::class, 'favoritar'])->name('filmes.favoritar');
+    Route::post('/filmes/favoritar/{filme}', [FilmesController::class, 'favoritar'])->name('filmes.favoritar');
     Route::get('/favoritos', [FilmesController::class, 'favoritos'])->name('filmes.favoritos');
+    Route::get('/perfil', [AuthController::class, 'perfil'])->name('perfil');
 });
 
 Route::middleware(['auth', 'isAdmin'])->group(function () {
@@ -54,4 +55,5 @@ Route::middleware(['auth', 'isAdmin'])->group(function () {
         Route::delete('/delete/{id}', [CategoriasController::class, 'delete'])->name('categorias.delete');
         Route::put('/update/{id}', [CategoriasController::class, 'update'])->name('categorias.update');
     });
+
 });
