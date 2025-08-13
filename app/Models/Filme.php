@@ -16,4 +16,9 @@ class Filme extends Model
     {
         return $this->belongsToMany(Categoria::class, 'categoria_filmes');
     }
+
+    public function favoritadoPor(): BelongsToMany
+    {
+        return $this->belongsToMany(User::class, 'favoritos');
+    }
 }

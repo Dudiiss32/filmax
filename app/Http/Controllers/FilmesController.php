@@ -31,7 +31,7 @@ class FilmesController extends Controller
     public function verMais($id)
     {
         $filme = Filme::with('categorias')->findOrFail($id);
- 
+
         return view("filmes.verMais", [
             'filme' => $filme,
         ]);
@@ -106,4 +106,29 @@ class FilmesController extends Controller
 
         return redirect()->route('filmes');
     }
+
+    public function favoritar(Filme $filme)
+    {
+        $user = auth()->user();
+
+        if ($user->favoritos()->where('filme_id', $filme->id)->exists()) {
+            $user->favoritos()->detach($filme->id);
+            $msg = 'Filme removido dos favoritos.';
+        } else {
+            $user->favoritos()->attach($filme->id);
+            $msg = 'Filme adicionado aos favoritos.';
+        }
+
+        return back()->with('success', $msg);
+    }
+
+    public function favoritos()
+    {
+        $user = auth()->user();
+
+        $filmesFavoritos = $user->favoritos()->get();
+
+        return view('filmes.favoritos', compact('filmesFavoritos'));
+    }
+
 }

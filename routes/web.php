@@ -30,6 +30,8 @@ Route::get('/register', function () {
 Route::middleware('auth')->group(function () {
     Route::get('/filmes', [FilmesController::class, 'index'])->name('filmes');
     Route::get('/filmes/verMais/{id}', [FilmesController::class, 'verMais'])->name('filmes.verMais');
+    Route::post('/filmes/{filme}/favoritar', [FilmesController::class, 'favoritar'])->name('filmes.favoritar');
+    Route::get('/favoritos', [FilmesController::class, 'favoritos'])->name('filmes.favoritos');
 });
 
 Route::middleware(['auth', 'isAdmin'])->group(function () {

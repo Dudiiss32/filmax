@@ -4,6 +4,7 @@ namespace App\Models;
 
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 
@@ -23,6 +24,11 @@ class User extends Authenticatable
         'isAdmin',
         'password',
     ];
+
+    public function favoritos(): BelongsToMany
+    {
+        return $this->belongsToMany(Filme::class, 'favoritos');
+    }
 
     /**
      * The attributes that should be hidden for serialization.

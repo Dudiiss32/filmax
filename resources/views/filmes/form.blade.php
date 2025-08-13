@@ -18,18 +18,6 @@
         </p>
     </div>
 
-    @if ($errors->any())
-        <div class="absolute top-4 w-full max-w-md mx-auto px-4 right-2">
-            <div class="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded-lg">
-                <ul class="list-disc list-inside">
-                    @foreach ($errors->all() as $error)
-                        <li>{{ $error }}</li>
-                    @endforeach
-                </ul>
-            </div>
-        </div>
-    @endif
-
     <div class="w-full h-full justify-center items-center flex mt-6">
         <form action="{{ isset($filme) ? route('filmes.update', $filme->id) : route('filmes.store') }}" method="POST"
             enctype="multipart/form-data"
@@ -74,7 +62,7 @@
             <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
                 @foreach ($categorias as $cat)
                     <div class="flex items-center space-x-2">
-                        <input type="checkbox" name="categorias[]" id="cat-{{$cat->id}}" value="{{$cat->id}}" {{ isset($filme) && $filme->categorias->contains($cat->id) ? 'checked' : '' }}>
+                        <input type="checkbox" name="categorias[]" id="cat-{{$cat->id}}" value="{{$cat->id}}" {{ in_array($cat->id, old('categorias', isset($filme) ? $filme->categorias->pluck('id')->toArray() : [])) ? 'checked' : '' }}>
                         <label for="cat-{{$cat->id}}" class="font-medium">{{$cat->nome}}</label>
                     </div>
                 @endforeach

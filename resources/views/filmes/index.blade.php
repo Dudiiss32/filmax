@@ -56,7 +56,7 @@
                             @endforeach
                         </div>
                         <a href="{{ route('filmes.verMais', $filme->id) }}"
-                            class="mt-auto inline-block text-center bg-[#6000FD] hover:bg-[#4700ba] text-white py-2 rounded-md transition">
+                            class="mt-auto inline-block text-center bg-[#6000FD] hover:bg-[#4700ba] text-white py-2 rounded-full transition">
                             Ver mais
                         </a>
                     </div>

@@ -6,20 +6,24 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     @vite(['resources/css/app.css'])
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <title>Login</title>
 </head>
 
 <body class="bg-[#0F0021] min-h-screen flex justify-center items-center flex-col">
-    @if ($errors->any())
-        <div class="absolute top-4 w-full max-w-md mx-auto px-4">
-            <div class="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded-lg">
-                <ul class="list-none list-inside">
-                    @foreach ($errors->all() as $error)
-                        <li>{{ $error }}</li>
-                    @endforeach
-                </ul>
-            </div>
-        </div>
+    @if($errors->any())
+        <script>
+            @foreach($errors->all() as $error)
+                Swal.fire({
+                    toast: true,
+                    position: 'top-end',
+                    icon: 'error',
+                    title: @json($error),
+                    showConfirmButton: false,
+                    timer: 3000
+                });
+            @endforeach
+        </script>
     @endif
     <h1 class="text-3xl font-bold text-center mb-6 text-white">Bem-vindo ao <span class="italic">FIL<span
                 class="text-[#6000FD] text-4xl">MAX!</span></span></h1>
@@ -30,25 +34,25 @@
             @csrf
             <div>
                 <label for="name" class="block mb-1 font-medium">Nome</label>
-                <input type="text" name="name" id="name"
+                <input type="text" name="name" id="name" value="{{ old('name') }}"
                     class="w-full px-4 py-2 rounded-lg bg-[#2B1A3D] focus:outline-none focus:ring-2 focus:ring-[#6000FD]">
             </div>
 
             <div>
                 <label for="email" class="block mb-1 font-medium">Email</label>
-                <input type="text" name="email" id="email"
+                <input type="text" name="email" id="email" value="{{ old('email') }}"
                     class="w-full px-4 py-2 rounded-lg bg-[#2B1A3D] focus:outline-none focus:ring-2 focus:ring-[#6000FD]">
             </div>
 
             <div>
                 <label for="password" class="block mb-1 font-medium">Senha</label>
-                <input type="password" name="password" id="password"
+                <input type="password" name="password" id="password" value="{{ old('password') }}"
                     class="w-full px-4 py-2 rounded-lg bg-[#2B1A3D] focus:outline-none focus:ring-2 focus:ring-[#6000FD]">
             </div>
 
             <div>
                 <label for="password_confirmation" class="block mb-1 font-medium">Confirme sua senha</label>
-                <input type="password" name="password_confirmation" id="password_confirmation"
+                <input type="password" name="password_confirmation" id="password_confirmation" value="{{ old('password_confirmation') }}"
                     class="w-full px-4 py-2 rounded-lg bg-[#2B1A3D] focus:outline-none focus:ring-2 focus:ring-[#6000FD]">
             </div>
 

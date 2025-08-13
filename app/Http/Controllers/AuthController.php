@@ -17,14 +17,12 @@ class AuthController extends Controller
             'password' => 'required|string|min:6|confirmed',
         ]);
 
-        logger($request);
-
         $user = User::create([
             'name' => $request->name,
             'email' => $request->email,
             'password' => Hash::make($request->password),
         ]);
-        
+
         Auth::login($user);
         $request->session()->regenerate();
         return redirect()->route('filmes');
@@ -42,9 +40,10 @@ class AuthController extends Controller
             return redirect()->route('filmes');
         }
 
-        return redirect()->route('index')->withErrors([
-            'email' => 'Credenciais inválidas',
-        ]);
+        return redirect()->route('index')
+            ->withErrors([
+                'email' => 'Credenciais inválidas',
+            ])->withInput();
     }
 
 
