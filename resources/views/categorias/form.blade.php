@@ -14,10 +14,11 @@
             @else
                 Cadastrar categoria
             @endif
+            <span class="italic text-[#6100FF] text-4xl">!</span>
         </p>
     </div>
     <div class="w-full h-full justify-center items-center flex mt-6">
-        <form class="bg-[#1E0F2C] w-full max-w-md p-8 rounded-2xl shadow-2xl text-white border-2 border-white space-y-3"
+        <form class="bg-[#1E0F2C] w-full max-w-md p-8 rounded-2xl shadow-2xl text-white space-y-3"
             action="{{ isset($categoria) ? route('categorias.update', $categoria->id) : route('categorias.store') }}"
             method="POST" enctype="multipart/form-data">
             @csrf

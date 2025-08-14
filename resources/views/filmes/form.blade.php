@@ -13,15 +13,16 @@
             @if (isset($filme))
                 Editar filme
             @else
-                Cadastrar filme
+                Cadastrar filme 
             @endif
+            <span class="italic text-[#6100FF] text-4xl">!</span>
         </p>
     </div>
 
     <div class="w-full h-full justify-center items-center flex mt-6">
         <form action="{{ isset($filme) ? route('filmes.update', $filme->id) : route('filmes.store') }}" method="POST"
             enctype="multipart/form-data"
-            class="bg-[#1E0F2C] w-full max-w-xl p-8 rounded-2xl shadow-2xl text-white border-2 border-white gap-4 flex flex-col">
+            class="bg-[#1E0F2C] w-full max-w-xl p-8 rounded-2xl shadow-2xl text-white  gap-4 flex flex-col">
             @csrf
             @if (isset($filme))
                 @method('PUT')

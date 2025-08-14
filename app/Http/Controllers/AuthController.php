@@ -53,9 +53,13 @@ class AuthController extends Controller
         return redirect()->route('index');
     }
 
-    public function perfil(){
-        $user = auth()->user();
+    public function perfil()
+    {
+        $user = auth()->user()->load('favoritos');
 
-        return view('perfil.index', compact('user'));
+        return view('perfil.index', [
+            'user' => $user,
+            'favoritos' => $user->favoritos
+        ]);
     }
 }

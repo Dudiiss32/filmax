@@ -113,13 +113,11 @@ class FilmesController extends Controller
 
         if ($user->favoritos()->where('filme_id', $filme->id)->exists()) {
             $user->favoritos()->detach($filme->id);
-            $msg = 'Filme removido dos favoritos.';
         } else {
             $user->favoritos()->attach($filme->id);
-            $msg = 'Filme adicionado aos favoritos.';
         }
 
-        return redirect()->route('filmes')->with('success', $msg);
+        return back();
     }
 
     public function favoritos()

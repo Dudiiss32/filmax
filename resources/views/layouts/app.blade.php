@@ -26,9 +26,9 @@
         </script>
     @endif
     <div class="flex min-h-screen select-none">
-        <header class="bg-[#0F0021] h-screen w-40 flex items-center justify-center fixed flex-col select-none">
+        <header class="bg-[#1E0F2C] h-screen w-40 flex items-center justify-center fixed flex-col select-none">
             <h1 class="text-2xl font-bold text-center mt-6 mb-6 text-white italic select-none">
-                FIL<span class="text-[#6000FD] text-3xl">MAX</span>
+                FIL<span class="text-[#6000FD] text-3xl">MAX!</span>
             </h1>
             <nav class="flex flex-col text-white space-y-10 flex-grow justify-center w-full px-6 select-none">
 
@@ -40,7 +40,7 @@
 
                 <a href="{{ route('filmes.favoritos') }}"
                     class="flex items-center hover:text-[#6000FD] hover:scale-107 transition">
-                    <x-hero-icon name="user" class="w-5 h-5 mr-2" />
+                    <x-hero-icon name="heart" class="w-5 h-5 mr-2" />
                     Favoritos
                 </a>
 
@@ -65,10 +65,11 @@
             </nav>
         </header>
 
-        <main class="flex-1 bg-[#1E0F2C] p-8 text-white ml-40 min-h-screen h-full select-none">
+        <main class="flex-1 bg-[#0F0021] p-8 pb-12 text-white ml-40 min-h-screen h-full select-none">
             <!-- Teste: este texto não deve ser selecionável -->
             @yield('content')
         </main>
+    </div>
 </body>
 
 </html>
