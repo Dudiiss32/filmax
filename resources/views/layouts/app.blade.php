@@ -5,12 +5,15 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     @vite(['resources/css/app.css', 'resources/js/app.js'])
+    @include('sweetalert2::index')
+    <link href="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.css" rel="stylesheet">
     <x-embed-styles />
     <title>@yield('title') - Filmax</title>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 </head>
 
 <body class="select-none">
+
     @if($errors->any())
         <script>
             @foreach($errors->all() as $error)
@@ -70,6 +73,8 @@
             @yield('content')
         </main>
     </div>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
 </body>
 
 </html>

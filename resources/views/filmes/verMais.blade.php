@@ -5,7 +5,7 @@
 @section('content')
 
     <div class="flex items-center gap-5">
-        <a href="{{route('filmes')}}"
+        <a href="{{ route('filmes') }}"
             class="flex border-2 border-[#6100FF] hover:bg-[#6100FF] px-4 py-2 w-fit rounded-full transition items-center">
             <x-hero-icon name="arrow-left" class="w-5 h-5 mr-2" />Voltar</a>
         <p class="font-bold text-2xl">Ver Mais <span class="italic text-[#6100FF] text-4xl">!</span></p>
@@ -13,12 +13,12 @@
 
     <div class="flex mt-6 gap-10">
         <div class="w-96">
-            <img src="{{asset($filme->imagem)}}" alt="{{$filme->nome}}" class="w-96 rounded-xl">
+            <img src="{{ asset($filme->imagem) }}" alt="{{ $filme->nome }}" class="w-96 rounded-xl">
         </div>
         <div class="flex-1 text-white space-y-5">
             <div class="flex gap-5 items-center">
                 <h1 class="font-bold text-4xl">{{ $filme->nome }}</h1>
-                <form action="{{route('filmes.favoritar', $filme->id)}}" method="post">
+                <form action="{{ route('filmes.favoritar', $filme->id) }}" method="post">
                     @csrf
                     <button type="submit"
                         class="flex items-center justify-center w-10 h-10 rounded-full hover:bg-black/60 transition-colors">
@@ -34,13 +34,15 @@
                         <a href="{{ route('filmes.edit', $filme->id) }} "
                             class="flex border-2 border-[#6100FF] hover:bg-[#6100FF] px-4 py-2 w-fit rounded-full transition items-center"><x-hero-icon
                                 name="pencil" class="w-5 h-5 mr-2" />Editar</a>
-                        <form action="{{ route('filmes.delete', $filme->id) }}" method="POST"
-                            onsubmit="return confirm('Excluir este filme?')">
+                        <form id="delete-filme" action="{{ route('filmes.delete', $filme->id) }}" method="POST">
                             @csrf
                             @method('DELETE')
-                            <button type="submit"
-                                class="flex cursor-pointer border-2 border-[#6100FF] hover:bg-[#6100FF] px-4 py-2 w-fit rounded-full transition items-center">
-                                <x-hero-icon name="trash" class="w-5 h-5 mr-2" />Excluir</button>
+
+                            <button type="button" id="btn-delete"
+                                class="flex cursor-pointer border-2 border-[#6100FF] bg-black/40 hover:bg-[#6100FF] px-4 py-2 w-fit rounded-full transition items-center">
+                                <x-hero-icon name="trash" class="w-5 h-5 mr-2" />Excluir
+                            </button>
+
                         </form>
                     </div>
                 @endcan
@@ -71,5 +73,29 @@
         </div>
     </div>
 
+    <script>
+        document.getElementById('btn-delete').addEventListener('click', function() {
+            const swalWithBootstrapButtons = Swal.mixin({
+                customClass: {
+                    confirmButton: "bg-[#6100FF] p-3 text-lg text-white rounded-xl ml-4 hover:bg-[#4700ba] transition",
+                    cancelButton: "bg-gray-500 p-3 text-lg text-white rounded-xl hover:bg-gray-400 transition"
+                },
+                buttonsStyling: false
+            });
+            swalWithBootstrapButtons.fire({
+                title: "Deseja mesmo excluir?",
+                text: "Essa ação não poderá ser revertida.",
+                icon: "warning",
+                showCancelButton: true,
+                confirmButtonText: "Deletar",
+                cancelButtonText: "Cancelar",
+                reverseButtons: true
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    document.getElementById('delete-filme').submit();
+                }
+            });
+        });
+    </script>
 
 @endsection

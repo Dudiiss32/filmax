@@ -2,3 +2,8 @@
 @tailwind components;
 @tailwind utilities;
 
+.swal2-styled {
+    font-size: 1rem !important;
+    font-weight: 500 !important;
+    color: white !important;
+}
